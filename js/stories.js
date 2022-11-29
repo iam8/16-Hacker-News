@@ -1,3 +1,8 @@
+// Ioana Alex Mititean
+// 11/28/22
+// Unit 16: Hack or Snooze
+
+
 "use strict";
 
 // This is the global list of the stories, an instance of StoryList

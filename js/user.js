@@ -1,3 +1,8 @@
+// Ioana Alex Mititean
+// 11/28/22
+// Unit 16: Hack or Snooze
+
+
 "use strict";
 
 // global to hold the User instance of the currently-logged-in user
