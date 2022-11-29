@@ -39,3 +39,13 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+/** Show form for submitting a new story after clicking "Submit a story" in navbar. */
+
+function navSubmitStoryClick(evt) {
+    console.debug("navSubmitStoryClick", evt);
+    hidePageComponents();
+    $newStoryForm.show();
+}
+
+$navSubStory.on("click", navSubmitStoryClick);
