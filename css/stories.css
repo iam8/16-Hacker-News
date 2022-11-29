@@ -1,3 +1,11 @@
+/* Story form */
+
+.story-form button {
+    width: 8rem;
+    margin-left: 80px;
+}
+
+
 /* Lists of stories */
 
 .stories-list {
