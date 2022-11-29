@@ -55,3 +55,28 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+/** Submit info entered by the user in the new story form, update the API with this info, and show the updated list of stories. */
+async function submitNewStoryInfo(event) {
+    console.debug("submitNewStoryInfo", event);
+    event.preventDefault();
+
+    // Grab the info from the story form
+    const title = $("#story-title").val();
+    const author = $("#story-author").val();
+    const url = $("#story-url").val();
+
+    console.debug(title, author, url);
+
+    const addedStory = await storyList.addStory(currentUser, { title, author, url });
+    $newStoryForm.trigger("reset");
+
+    // Add the new story to the story list
+    // storyList.stories.push(addedStory);
+    // putStoriesOnPage();
+
+    // Update the page with the new story
+    await getAndShowStoriesOnStart();
+}
+
+$newStoryForm.on("submit", submitNewStoryInfo);
