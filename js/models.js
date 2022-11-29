@@ -1,3 +1,7 @@
+// Ioana Alex Mititean
+// 11/28/22
+// Unit 16: Hack or Snooze
+
 "use strict";
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
