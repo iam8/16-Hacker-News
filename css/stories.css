@@ -1,9 +1,17 @@
 /* Story form */
 
+.story-form-container {
+    padding-left: 20px;
+}
+
 .story-form button {
     width: 8rem;
     margin-left: 80px;
 }
+
+.story-input label {
+    width: 70px;
+  }
 
 
 /* Lists of stories */
