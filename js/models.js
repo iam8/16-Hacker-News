@@ -37,49 +37,43 @@ class Story {
 /******************************************************************************
  * List of Story instances: used by UI to show story lists in DOM.
  */
-
 class StoryList {
-  constructor(stories) {
-    this.stories = stories;
-  }
+    constructor(stories) {
+        this.stories = stories;
+    }
 
-  /** Generate a new StoryList. It:
-   *
-   *  - calls the API
-   *  - builds an array of Story instances
-   *  - makes a single StoryList instance out of that
-   *  - returns the StoryList instance.
-   */
+    /** Generate a new StoryList. It:
+     *
+     *  - calls the API
+     *  - builds an array of Story instances
+     *  - makes a single StoryList instance out of that
+     *  - returns the StoryList instance.
+     */
+    static async getStories() {
 
-  static async getStories() {
-    // Note presence of `static` keyword: this indicates that getStories is
-    //  **not** an instance method. Rather, it is a method that is called on the
-    //  class directly. Why doesn't it make sense for getStories to be an
-    //  instance method?
+        // Query the /stories endpoint (no auth required)
+        const response = await axios({
+            url: `${BASE_URL}/stories`,
+            method: "GET",
+        });
 
-    // query the /stories endpoint (no auth required)
-    const response = await axios({
-      url: `${BASE_URL}/stories`,
-      method: "GET",
-    });
+        // Turn plain old story objects from API into instances of Story class
+        const stories = response.data.stories.map(story => new Story(story));
 
-    // turn plain old story objects from API into instances of Story class
-    const stories = response.data.stories.map(story => new Story(story));
+        // Build an instance of our own class using the new array of stories
+        return new StoryList(stories);
+    }
 
-    // build an instance of our own class using the new array of stories
-    return new StoryList(stories);
-  }
+    /** Adds story data to API, makes a Story instance, and adds it to story list.
+     * - user: the current instance of User who will post the story
+     * - newStory: object of {title, author, url}
+     *
+     * Returns the new Story instance
+     */
+    async addStory(/* user, newStory */) {
+        // UNIMPLEMENTED: complete this function!
 
-  /** Adds story data to API, makes a Story instance, adds it to story list.
-   * - user - the current instance of User who will post the story
-   * - obj of {title, author, url}
-   *
-   * Returns the new Story instance
-   */
-
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
-  }
+    }
 }
 
 
