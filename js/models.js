@@ -12,25 +12,29 @@ const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
 class Story {
 
-  /** Make instance of Story from data object about story:
-   *   - {title, author, url, username, storyId, createdAt}
-   */
+    /** Make instance of Story from data object about story:
+     *   - {title, author, url, username, storyId, createdAt}
+     */
 
-  constructor({ storyId, title, author, url, username, createdAt }) {
-    this.storyId = storyId;
-    this.title = title;
-    this.author = author;
-    this.url = url;
-    this.username = username;
-    this.createdAt = createdAt;
-  }
+    constructor({ storyId, title, author, url, username, createdAt }) {
+        this.storyId = storyId;
+        this.title = title;
+        this.author = author;
+        this.url = url;
+        this.username = username;
+        this.createdAt = createdAt;
+    }
 
-  /** Parses hostname out of URL and returns it. */
+    /** Parses the hostname out of URL and returns it. */
+    getHostName() {
+        const splitOnSlash = this.url.split("/");
 
-  getHostName() {
-    // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
-  }
+        for (let piece of splitOnSlash) {
+            if (piece.includes(".")) {
+                return piece.replace("www.", "");
+            }
+        }
+    }
 }
 
 
