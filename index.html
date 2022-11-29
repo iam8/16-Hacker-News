@@ -41,6 +41,9 @@
         <div class="navbar-brand">
             <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
         </div>
+        <div class="navbar-middle">
+            <a class="nav-link" href="#" id="nav-submit-story">Submit a story</a>
+        </div>
         <div class="nav-right">
             <a class="nav-link" href="#" id="nav-login">login/signup</a>
             <a class="nav-link" href="#" id="nav-user-profile"></a>
@@ -93,6 +96,24 @@
                 <input id="signup-password" autocomplete="new-password" type="password">
             </div>
             <button type="submit">create account</button>
+        </form>
+
+        <!-- New story form -->
+        <form action="#" id="story-form" class="story-form" method="post">
+            <h4>Add New Story</h4>
+            <div class="login-input">
+                <label for="story-title">Title</label>
+                <input id="story-title">
+            </div>
+            <div class="login-input">
+                <label for="story-author">Author</label>
+                <input id="story-author">
+            </div>
+            <div class="login-input">
+                <label for="story-url">URL</label>
+                <input id="story-url">
+            </div>
+            <button type="submit">Add story</button>
         </form>
     </section>
 
