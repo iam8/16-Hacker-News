@@ -84,6 +84,8 @@ class StoryList {
                 "story" : newStory
             });
 
+        // TODO: ADD THE NEW STORY TO THE STORY LIST BEFORE RETURNING IT!
+
         return new Story(response.data.story);
     }
 }
