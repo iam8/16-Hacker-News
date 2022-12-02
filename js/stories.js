@@ -72,11 +72,11 @@ async function submitNewStoryInfo(event) {
     $newStoryForm.trigger("reset");
 
     // Add the new story to the story list
-    // storyList.stories.push(addedStory);
-    // putStoriesOnPage();
+    storyList.stories.unshift(addedStory);
+    putStoriesOnPage();
 
     // Update the page with the new story
-    await getAndShowStoriesOnStart();
+    // await getAndShowStoriesOnStart();
 }
 
 $newStoryForm.on("submit", submitNewStoryInfo);
