@@ -76,7 +76,6 @@ class StoryList {
      */
     async addStory(user, newStory) {
 
-        // Make POST request to API with new story
         const response = await axios.post(
             `${BASE_URL}/stories`,
             {
@@ -84,9 +83,11 @@ class StoryList {
                 "story" : newStory
             });
 
-        // TODO: ADD THE NEW STORY TO THE STORY LIST BEFORE RETURNING IT!
+        // Update the stories list with the new story
+        const storyObj = new Story(response.data.story);
+        this.stories.unshift(storyObj);
 
-        return new Story(response.data.story);
+        return storyObj;
     }
 }
 
