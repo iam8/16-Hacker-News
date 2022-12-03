@@ -66,17 +66,10 @@ async function submitNewStoryInfo(event) {
     const author = $("#story-author").val();
     const url = $("#story-url").val();
 
-    console.debug(title, author, url);
-
-    const addedStory = await storyList.addStory(currentUser, { title, author, url });
+    await storyList.addStory(currentUser, { title, author, url });
     $newStoryForm.trigger("reset");
 
-    // Add the new story to the story list
-    storyList.stories.unshift(addedStory);
     putStoriesOnPage();
-
-    // Update the page with the new story
-    // await getAndShowStoriesOnStart();
 }
 
 $newStoryForm.on("submit", submitNewStoryInfo);
