@@ -87,6 +87,11 @@ class StoryList {
         const storyObj = new Story(response.data.story);
         this.stories.unshift(storyObj);
 
+        // Add this story to the user's list of own stories if author matches the user's name
+        if (storyObj.author === user.username) {
+            user.ownStories.push(storyObj);
+        }
+
         return storyObj;
     }
 }
@@ -121,6 +126,16 @@ class User {
     // store the login token on the user so it's easy to find for API calls.
     this.loginToken = token;
   }
+
+    /** Add a story (by its ID) to the list of favorite stories for this user. */
+    addStoryToFavorites(storyId) {
+        this.favorites.push(storyId);
+    }
+
+    /** Remove a story (by its ID) from the list of favorites for this user. */
+    removeStoryFromFavorites(storyId) {
+        
+    }
 
   /** Register new user in API, make User instance & return it.
    *
