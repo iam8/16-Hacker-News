@@ -68,6 +68,7 @@ async function submitNewStoryInfo(event) {
 
     await storyList.addStory(currentUser, { title, author, url });
     $newStoryForm.trigger("reset");
+    $newStoryForm.hide();
 
     putStoriesOnPage();
 }
