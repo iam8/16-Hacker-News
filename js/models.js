@@ -87,10 +87,8 @@ class StoryList {
         const storyObj = new Story(response.data.story);
         this.stories.unshift(storyObj);
 
-        // Add this story to the user's list of own stories if author matches the user's name
-        if (storyObj.author === user.username) {
-            user.ownStories.push(storyObj);
-        }
+        // Add this story to the user's list of posted stories
+        user.ownStories.push(storyObj);
 
         return storyObj;
     }
@@ -127,9 +125,9 @@ class User {
     this.loginToken = token;
   }
 
-    /** Add a story (by its ID) to the list of favorite stories for this user. */
-    addStoryToFavorites(storyId) {
-        this.favorites.push(storyId);
+    /** Add a story to the list of favorite stories for this user. */
+    addStoryToFavorites(story) {
+        this.favorites.push(story);
     }
 
     /** Remove a story (by its ID) from the list of favorites for this user. */
