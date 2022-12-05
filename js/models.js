@@ -135,7 +135,8 @@ class User {
             `${BASE_URL}/users/${this.username}/favorites/${storyId}`,
             {
                 "token" : this.loginToken
-            });
+            }
+        );
 
         // Get the Story object with the given storyId and add it to the favorites list
         for (let story of storyList.stories) {
@@ -151,8 +152,15 @@ class User {
      * - storyId (string): the ID of the story to be removed from favorites.
      * 
      */
-    removeStoryFromFavorites(storyId) {
-        
+    async removeStoryFromFavorites(storyId) {
+        await axios.delete(
+            `${BASE_URL}/users/${this.username}/favorites/${storyId}`,
+            {
+                "data" : {
+                    "token" : this.loginToken
+                }
+            }
+        );
     }
 
   /** Register new user in API, make User instance & return it.
