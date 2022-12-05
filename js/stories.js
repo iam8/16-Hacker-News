@@ -56,6 +56,23 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+/** Get list of favorited user stories, generate their HTML, and display the list on the page. */
+function putFavoritesOnPage() {
+    console.debug("putFavoritesOnPage");
+
+    $favoritesList.empty();
+
+    // Loop through the favorited stories for this user and generate HTML for them
+    for (let fav of currentUser.favorites) {
+        const $favStory = generateStoryMarkup(fav);
+        $favoritesList.append($favStory);
+    }
+
+    $favoritesList.show();
+}
+
+
+
 /** Submit info entered by the user in the new story form, update the API with this info, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
     console.debug("submitNewStoryInfo", event);
