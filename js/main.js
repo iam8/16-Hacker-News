@@ -50,8 +50,10 @@ async function start() {
   await checkForRememberedUser();
   await getAndShowStoriesOnStart();
 
-  // if we got a logged-in user
-  if (currentUser) updateUIOnUserLogin();
+    // if we got a logged-in user
+    if (currentUser) {
+        updateUIOnUserLogin();
+    }
 }
 
 // Once the DOM is entirely loaded, begin the app
