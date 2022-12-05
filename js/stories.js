@@ -73,7 +73,6 @@ function putFavoritesOnPage() {
 }
 
 
-
 /** Submit info entered by the user in the new story form, update the API with this info, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
     console.debug("submitNewStoryInfo", event);
@@ -92,3 +91,12 @@ async function submitNewStoryInfo(event) {
 }
 
 $newStoryForm.on("submit", submitNewStoryInfo);
+
+
+/** Toggle the 'favorite' status of a displayed story when its star icon is clicked. */
+function toggleFavoriteStatus(event) {
+    console.debug("toggleFavoriteStatus", event);
+    console.debug(this);
+}
+
+$body.on("click", "i.fa-star", toggleFavoriteStatus);
