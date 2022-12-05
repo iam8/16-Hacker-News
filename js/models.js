@@ -92,6 +92,49 @@ class StoryList {
 
         return storyObj;
     }
+
+    /** Remove a story from the API and the global story list.
+     * NOTE: A user can only remove stories that they posted.
+     * 
+     * - user: the current instance of User who deletes the story
+     * - storyId: the ID of the story that will be deleted
+     * 
+     */
+    async removeStory(user, storyId) {
+
+        await axios.delete(
+            `${BASE_URL}/stories/${storyId}`,
+            {
+                "data" : {
+                    "token" : user.loginToken
+                }
+            }
+        )
+
+        // Remove this story from the global story list
+        const storyIdx = this.stories.findIndex(
+            (story) => story.storyId === storyId
+        );
+
+        if (storyIdx >= 0) {
+            this.stories.splice(storyIdx, 1);
+        }
+
+        // // Remove this story from the user's ownStories and favorites lists
+        // const ownStoriesIdx = user.ownStories.findIndex(
+        //     (story) => story.storyId === storyId);
+
+        // const favIdx = user.favorites.findIndex(
+        //     (story) => story.storyId === storyId);
+
+        // if (ownStoriesIdx >= 0) {
+        //     user.ownStories.splice(ownStoriesIdx, 1);
+        // }
+
+        // if (favIdx >= 0) {
+        //     user.favorites.splice(favIdx, 1);
+        // }
+    }
 }
 
 
