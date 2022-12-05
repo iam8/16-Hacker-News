@@ -125,9 +125,10 @@ class User {
     this.loginToken = token;
   }
 
-    /** Add a story to this User's favorites - update the API with the new favorite.
+    /** Add a story to this User's favorites - update the API and the User's favorites list with the new favorite.
      * 
      * - storyId (string): the ID of the story to be favorited.
+     * 
      * */
     async addStoryToFavorites(storyId) {
         await axios.post(
@@ -135,11 +136,20 @@ class User {
             {
                 "token" : this.loginToken
             });
+
+        // Get the Story object with the given storyId and add it to the favorites list
+        for (let story of storyList.stories) {
+            if (story.storyId === storyId) {
+                this.favorites.unshift(story);
+                return;
+            }
+        }
     }
 
-    /** Remove a story from this User's favorites - update the API with the new favorite's removal.
+    /** Remove a story from this User's favorites - update the API and the User's favorite list with the new favorite's removal.
      * 
      * - storyId (string): the ID of the story to be removed from favorites.
+     * 
      */
     removeStoryFromFavorites(storyId) {
         
