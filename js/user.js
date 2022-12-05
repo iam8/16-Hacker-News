@@ -107,7 +107,7 @@ function saveUserCredentialsInLocalStorage() {
 
 /** When a user signs up or registers, we want to set up the UI for them:
  *
- * - show the stories list
+ * - show the stories list, with 'favorite' status for each
  * - update nav bar options for logged-in user
  * - generate the user profile part of the page
  */
@@ -116,7 +116,6 @@ function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
   hidePageComponents();
-  $allStoriesList.show();
-
+  putStoriesOnPage();
   updateNavOnLogin();
 }
