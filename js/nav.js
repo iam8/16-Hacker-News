@@ -49,3 +49,13 @@ function navSubmitStoryClick(evt) {
 }
 
 $navSubStory.on("click", navSubmitStoryClick);
+
+/** Show list of favorited stories after clicking "View favorites" in navbar. */
+
+function navViewFavoritesClick(evt) {
+    console.debug("navViewFavoritesClick", evt);
+    hidePageComponents();
+    putFavoritesOnPage();
+}
+
+$navViewFavorites.on("click", navViewFavoritesClick);
