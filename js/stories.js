@@ -11,10 +11,11 @@ let storyList;
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
-  storyList = await StoryList.getStories();
-  $storiesLoadingMsg.remove();
+    console.debug("getAndShowStoriesOnStart");
+    storyList = await StoryList.getStories();
+    $storiesLoadingMsg.remove();
 
-  putStoriesOnPage();
+    putStoriesOnPage();
 }
 
 /**
@@ -25,12 +26,26 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
+
+    let favIconClass;
+    if (currentUser) {
+
+        // Determine if the story should show up as favorited or not
+        favIconClass = "far fa-star";
+        for (let fav of currentUser.favorites) {
+            if (fav.storyId === story.storyId) {
+                favIconClass = "fas fa-star";
+                break;
+            }
+        }
+    } else {
+        favIconClass = "hidden";
+    }
 
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <i class="far fa-star"></i>
+        <i class="${favIconClass}"></i>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -59,7 +74,7 @@ function putStoriesOnPage() {
 
 /** Get list of favorited user stories, generate their HTML, and display the list on the page. */
 function putFavoritesOnPage() {
-    console.debug("putFavoritesOnPage");
+    // console.debug("putFavoritesOnPage");
 
     $favoritesList.empty();
 
@@ -75,7 +90,7 @@ function putFavoritesOnPage() {
 
 /** Submit info entered by the user in the new story form, update the API with this info, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
-    console.debug("submitNewStoryInfo", event);
+    // console.debug("submitNewStoryInfo", event);
     event.preventDefault();
 
     // Grab the info from the story form
@@ -94,18 +109,26 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 
 
 /** Toggle the 'favorite' status of a displayed story when its star icon is clicked. */
-function toggleFavoriteStatus(event) {
+async function toggleFavoriteStatus(event) {
     // console.debug("toggleFavoriteStatus", event);
-    // console.debug(this);
 
     // Toggle the visual display of the favorite star icon when clicked
     $(this).toggleClass(["far", "fas"]);
 
     // Retrieve the story object that the clicked icon is attached to
     const clickedStoryId = $(this).parent().attr("id");
+    // console.debug(clickedStoryId);
 
-    // If the clicked story exists in the User's favorites, it will be removed
+    const initFavLen = currentUser.favorites.length;
 
+    // Try removing the story from the favorites list
+    // If the favorites length is still the same, the story wasn't in favorites before, so it must be added then
+    await currentUser.removeStoryFromFavorites(clickedStoryId);
+
+    if (currentUser.favorites.length === initFavLen) {
+        console.debug("Nothing was removed from favs")
+        await currentUser.addStoryToFavorites(clickedStoryId);
+    }
 }
 
 $body.on("click", "i.fa-star", toggleFavoriteStatus);
