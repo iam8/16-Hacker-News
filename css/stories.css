@@ -40,6 +40,10 @@
 
 /* Individual stories */
 
+i.far:hover {
+    color: black;
+}
+
 .story-link {
   color: black;
   font-size: 0.85rem;
@@ -58,3 +62,5 @@
 .story-user {
   display: block;
 }
+
+
