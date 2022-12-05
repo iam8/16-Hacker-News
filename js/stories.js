@@ -97,6 +97,9 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 function toggleFavoriteStatus(event) {
     console.debug("toggleFavoriteStatus", event);
     console.debug(this);
+
+    // Toggle the visual display of the favorite star icon when clicked
+    $(this).toggleClass(["far", "fas"]);
 }
 
 $body.on("click", "i.fa-star", toggleFavoriteStatus);
