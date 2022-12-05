@@ -138,7 +138,7 @@ class User {
             }
         );
 
-        // Get the Story object with the given storyId and add it to the favorites list
+        // Get the Story object with the given storyId and add it to the User's favorites list
         for (let story of storyList.stories) {
             if (story.storyId === storyId) {
                 this.favorites.unshift(story);
@@ -161,6 +161,14 @@ class User {
                 }
             }
         );
+
+        // Remove the Story object with the given storyId from the User's favorites list
+        for (let index in this.favorites) {
+            if (this.favorites[index].storyId === storyId) {
+                this.favorites.splice(index, 1);
+                return;
+            }
+        }
     }
 
   /** Register new user in API, make User instance & return it.
