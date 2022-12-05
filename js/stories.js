@@ -95,11 +95,17 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 
 /** Toggle the 'favorite' status of a displayed story when its star icon is clicked. */
 function toggleFavoriteStatus(event) {
-    console.debug("toggleFavoriteStatus", event);
-    console.debug(this);
+    // console.debug("toggleFavoriteStatus", event);
+    // console.debug(this);
 
     // Toggle the visual display of the favorite star icon when clicked
     $(this).toggleClass(["far", "fas"]);
+
+    // Retrieve the story object that the clicked icon is attached to
+    const clickedStoryId = $(this).parent().attr("id");
+
+    // If the clicked story exists in the User's favorites, it will be removed
+
 }
 
 $body.on("click", "i.fa-star", toggleFavoriteStatus);
