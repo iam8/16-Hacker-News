@@ -27,10 +27,12 @@ async function getAndShowStoriesOnStart() {
 
 function generateStoryMarkup(story) {
 
-    let favIconClass;
+    let favIconClass = "hidden";
+    let delIconClass = "hidden";
+
     if (currentUser) {
 
-        // Determine if the story should show up as favorited or not
+        // Determine if the story should show up as favorited
         favIconClass = "far fa-star";
         for (let fav of currentUser.favorites) {
             if (fav.storyId === story.storyId) {
@@ -38,8 +40,11 @@ function generateStoryMarkup(story) {
                 break;
             }
         }
-    } else {
-        favIconClass = "hidden";
+
+        // Determine if the story should show the delete icon
+        if (story.username === currentUser.username) {
+            delIconClass = "fas fa-trash-alt";
+        }
     }
 
   const hostName = story.getHostName();
@@ -52,6 +57,7 @@ function generateStoryMarkup(story) {
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
+        <i class="${delIconClass}"></i>
       </li>
     `);
 }
