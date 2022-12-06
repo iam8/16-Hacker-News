@@ -40,8 +40,21 @@
 
 /* Individual stories */
 
-i:hover {
+i.fa-star {
     color: black;
+}
+
+i.fa-star:hover {
+    color: grey;
+}
+
+i.fa-trash-alt {
+    color: red;
+    margin-left: 2em;
+}
+
+i.fa-trash-alt:hover {
+    color: orange;
 }
 
 .story-link {
