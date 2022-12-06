@@ -47,7 +47,6 @@ class StoryList {
     }
 
     /** Generate a new StoryList. It:
-     *
      * - calls the API
      * - builds an array of Story instances
      * - makes a single StoryList instance out of those Story instances
@@ -61,10 +60,8 @@ class StoryList {
     }
 
     /** Add story data to API, make a Story instance, and add it to the story list.
-     * 
      * - user: the current instance of User who will post the story
      * - newStory: data about the new story - object of {title, author, url}
-     *
      *  Returns the new Story instance.
      */
     async addStory(user, newStory) {
@@ -88,10 +85,8 @@ class StoryList {
 
     /** Remove a story from the API and all internal story lists.
      * NOTE: A user can only remove stories that they posted.
-     * 
      * - user: the current instance of User who deletes the story
      * - storyId: the ID of the story that will be deleted
-     * 
      */
     async removeStory(user, storyId) {
 
