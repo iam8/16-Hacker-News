@@ -2,25 +2,10 @@
 <!-- 11/27/22 -->
 <!-- Unit 16: Hack or Snooze -->
 
-<!-- Part 4: Removing Stories
-Specs (logic):
-    - Only allow a logged in user to delete a story
-    - The user can only delete stories they have posted
-    - A story chosen for deletion will be removed from the API and from the User's story list (ownStories, favorites)
-
-Specs (UI):
-    - Only logged-in users can see the trash symbol next to a story
-    - Stories posted by the user (only) will have a 'trash' symbol to the far right
-    - Clicking this symbol will remove that story from the DOM and API
--->
-
 
 <!DOCTYPE html>
 
 <!-- Hack or Snooze
-
-     This is the only HTML page; the applications manipulates this DOM
-     during use.
 
      Primary authors:
      - Michael Hueter: initial creation, 2018
@@ -68,13 +53,8 @@ Specs (UI):
     <!-- Area for stories (all stories, user stories, favorites) -->
     <section class="stories-container container">
 
-        <!-- Loading message (removed by JS after stories are loaded) -->
         <div id="stories-loading-msg">Loading&hellip;</div>
-
-        <!-- List of all stories -->
         <ol id="all-stories-list" class="stories-list"></ol>
-
-        <!-- List of user favorites -->
         <ol id="favorite-stories-list" class="stories-list hidden"></ol>
 
     </section>
