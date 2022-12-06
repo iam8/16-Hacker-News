@@ -141,7 +141,7 @@ $body.on("click", "i.fa-star", toggleFavoriteStatus);
 
 
 /** Remove the story from the API and the page when the delete (trash) icon next to that story is clicked. */
-async function deleteStoryClick(event) {
+async function handleDeleteIconClick(event) {
     // console.debug("Story delete icon has been clicked", event);
 
     const clickedStoryId = $(this).parent().attr("id");
