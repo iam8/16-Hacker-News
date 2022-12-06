@@ -2,10 +2,9 @@
 // 11/28/22
 // Unit 16: Hack or Snooze
 
-
 "use strict";
 
-// So we don't have to keep re-finding things on page, find DOM elements once:
+// Global DOM elements
 
 const $body = $("body");
 
@@ -25,41 +24,42 @@ const $newStoryForm = $("#story-form");
 const $navViewFavorites = $("#nav-view-favorites");
 const $favoritesList = $("#favorite-stories-list");
 
-/** To make it easier for individual components to show just themselves, this
- * is a useful function that hides pretty much everything on the page. After
- * calling this, individual components can re-show just what they want.
- */
 
+/** Hide all major page components, such as forms and story lists.
+ * 
+ * This function makes it easier for individual components to re-show just what they want.
+ */
 function hidePageComponents() {
-  const components = [
-    $allStoriesList,
-    $loginForm,
-    $signupForm,
-    $newStoryForm,
-    $favoritesList,
-  ];
-  components.forEach(c => c.hide());
+    const components = [
+        $allStoriesList,
+        $loginForm,
+        $signupForm,
+        $newStoryForm,
+        $favoritesList,
+    ];
+
+    components.forEach(c => c.hide());
 }
 
+
 /** Overall function to kick off the app. */
-
 async function start() {
-  console.debug("start");
+//   console.debug("start");
 
-  // "Remember logged-in user" and log in, if credentials in localStorage
-  await checkForRememberedUser();
-  await getAndShowStoriesOnStart();
+    // "Remember logged-in user" and log in if their credentials exist in local storage
+    await checkForRememberedUser();
+    await getAndShowStoriesOnStart();
 
-    // if we got a logged-in user
     if (currentUser) {
         updateUIOnUserLogin();
     }
 }
 
-// Once the DOM is entirely loaded, begin the app
 
-console.warn("HEY STUDENT: This program sends many debug messages to" +
-  " the console. If you don't see the message 'start' below this, you're not" +
-  " seeing those helpful debug messages. In your browser console, click on" +
-  " menu 'Default Levels' and add Verbose");
+// console.warn("HEY STUDENT: This program sends many debug messages to" +
+//   " the console. If you don't see the message 'start' below this, you're not" +
+//   " seeing those helpful debug messages. In your browser console, click on" +
+//   " menu 'Default Levels' and add Verbose");
+
+// Once the DOM is entirely loaded, begin the app
 $(start);
