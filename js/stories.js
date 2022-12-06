@@ -153,4 +153,4 @@ async function handleDeleteIconClick(event) {
     await storyList.removeStory(currentUser, clickedStoryId);
 }
 
-$body.on("click", "i.fa-trash-alt", deleteStoryClick);
+$body.on("click", "i.fa-trash-alt", handleDeleteIconClick);
