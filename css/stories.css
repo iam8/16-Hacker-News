@@ -3,7 +3,7 @@
 /* Unit 16: Hack or Snooze */
 
 
-/* Story form */
+/* Story form -----------------------------------------------------------------------------------*/
 
 .story-form-container {
     padding-left: 20px;
@@ -19,7 +19,7 @@
   }
 
 
-/* Lists of stories */
+/* Lists of stories -----------------------------------------------------------------------------*/
 
 .stories-list {
   margin: 20px 5px;
@@ -38,7 +38,7 @@
 }
 
 
-/* Individual stories */
+/* Individual stories ---------------------------------------------------------------------------*/
 
 i.fa-star {
     color: black;
@@ -75,5 +75,3 @@ i.fa-trash-alt:hover {
 .story-user {
   display: block;
 }
-
-
