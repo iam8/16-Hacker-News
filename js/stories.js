@@ -2,10 +2,13 @@
 // 11/28/22
 // Unit 16: Hack or Snooze
 
+// TODO: error handling
+// TODO: merge the putStoriesOnPage and putFavoritesOnPage into a single function
+
 "use strict";
 
-
 let storyList;  // Global list of stories (StoryList instance)
+
 
 /** Get and show stories when the site first loads. */
 async function getAndShowStoriesOnStart() {
@@ -21,7 +24,6 @@ async function getAndShowStoriesOnStart() {
  *
  * Returns the markup for the story.
  */
-
 function generateStoryMarkup(story) {
 
     let favIconClass = "hidden";
@@ -56,29 +58,26 @@ function generateStoryMarkup(story) {
     `);
 }
 
-/** Gets list of stories from server, generates their HTML, and puts on page. */
-
+/** Get list of all stories from global StoryList, generate their HTML, and display the list on the page. */
 function putStoriesOnPage() {
-  console.debug("putStoriesOnPage");
+//   console.debug("putStoriesOnPage");
 
-  $allStoriesList.empty();
+    $allStoriesList.empty();
 
-  // loop through all of our stories and generate HTML for them
-  for (let story of storyList.stories) {
-    const $story = generateStoryMarkup(story);
-    $allStoriesList.append($story);
-  }
+    for (let story of storyList.stories) {
+        const $story = generateStoryMarkup(story);
+        $allStoriesList.append($story);
+    }
 
-  $allStoriesList.show();
+    $allStoriesList.show();
 }
 
-/** Get list of favorited user stories, generate their HTML, and display the list on the page. */
+/** Get list of this user's favorited stories, generate their HTML, and display the list on the page. */
 function putFavoritesOnPage() {
     // console.debug("putFavoritesOnPage");
 
     $favoritesList.empty();
 
-    // Loop through the favorited stories for this user and generate HTML for them
     for (let fav of currentUser.favorites) {
         const $favStory = generateStoryMarkup(fav);
         $favoritesList.append($favStory);
@@ -88,7 +87,7 @@ function putFavoritesOnPage() {
 }
 
 
-/** Submit info entered by the user in the new story form, update the API with this info, and show the updated list of stories. */
+/** Submit and update the API with the info entered by the user in the new story form, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
     // console.debug("submitNewStoryInfo", event);
     event.preventDefault();
@@ -109,24 +108,20 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 
 
 /** Toggle the 'favorite' status of a displayed story when its star icon is clicked. */
-async function toggleFavoriteStatus(event) {
-    // console.debug("toggleFavoriteStatus", event);
+async function toggleFavoriteStatus() {
+    // console.debug("toggleFavoriteStatus");
 
-    // Toggle the visual display of the favorite star icon when clicked
+    // Toggle the star icon's visuals
     $(this).toggleClass(["far", "fas"]);
 
-    // Retrieve the story object that the clicked icon is attached to
     const clickedStoryId = $(this).parent().attr("id");
-    // console.debug(clickedStoryId);
-
-    const initFavLen = currentUser.favorites.length;
 
     // Try removing the story from the favorites list
-    // If the favorites length is still the same, the story wasn't in favorites before, so it must be added then
+    const initFavLen = currentUser.favorites.length;
     await currentUser.removeStoryFromFavorites(clickedStoryId);
 
+    // If the favorites list didn't change, the story must be added to favorites
     if (currentUser.favorites.length === initFavLen) {
-        console.debug("Nothing was removed from favs")
         await currentUser.addStoryToFavorites(clickedStoryId);
     }
 }
@@ -135,12 +130,10 @@ $body.on("click", "i.fa-star", toggleFavoriteStatus);
 
 
 /** Remove the story from the API and the page when the delete (trash) icon next to that story is clicked. */
-async function handleDeleteIconClick(event) {
-    // console.debug("Story delete icon has been clicked", event);
+async function handleDeleteIconClick() {
+    // console.debug("Story delete icon has been clicked");
 
     const clickedStoryId = $(this).parent().attr("id");
-
-    // Remove the list item containing that story from the DOM
     $(this).parent().remove();
 
     // Remove the clicked story from the API and internal story lists
