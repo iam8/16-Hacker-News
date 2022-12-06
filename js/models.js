@@ -120,20 +120,20 @@ class StoryList {
             this.stories.splice(storyIdx, 1);
         }
 
-        // // Remove this story from the user's ownStories and favorites lists
-        // const ownStoriesIdx = user.ownStories.findIndex(
-        //     (story) => story.storyId === storyId);
+        // Remove this story from the user's ownStories and favorites lists
+        const ownStoriesIdx = user.ownStories.findIndex(
+            (story) => story.storyId === storyId);
 
-        // const favIdx = user.favorites.findIndex(
-        //     (story) => story.storyId === storyId);
+        const favIdx = user.favorites.findIndex(
+            (story) => story.storyId === storyId);
 
-        // if (ownStoriesIdx >= 0) {
-        //     user.ownStories.splice(ownStoriesIdx, 1);
-        // }
+        if (ownStoriesIdx >= 0) {
+            user.ownStories.splice(ownStoriesIdx, 1);
+        }
 
-        // if (favIdx >= 0) {
-        //     user.favorites.splice(favIdx, 1);
-        // }
+        if (favIdx >= 0) {
+            user.favorites.splice(favIdx, 1);
+        }
     }
 }
 
@@ -184,7 +184,7 @@ class User {
         // Get the Story object with the given storyId and add it to the User's favorites list
         for (let story of storyList.stories) {
             if (story.storyId === storyId) {
-                this.favorites.unshift(story);
+                this.favorites.push(story);
                 return;
             }
         }
