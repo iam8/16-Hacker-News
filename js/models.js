@@ -2,10 +2,10 @@
 // 11/28/22
 // Unit 16: Hack or Snooze
 
-
 "use strict";
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
+
 
 /**************************************************************************************************
  * Story: contains data for a single story in the system.
@@ -26,8 +26,8 @@ class Story {
 
     /** Parse the hostname out of the URL and return it. */
     getHostName() {
-
         const splitOnSlash = this.url.split("/");
+
         for (let piece of splitOnSlash) {
             if (piece.includes(".")) {
                 return piece.replace("www.", "");
@@ -53,9 +53,9 @@ class StoryList {
      * - returns the StoryList instance.
      */
     static async getStories() {
-
         const response = await axios.get(`${BASE_URL}/stories`);
         const stories = response.data.stories.map(story => new Story(story));
+
         return new StoryList(stories);
     }
 
@@ -65,7 +65,6 @@ class StoryList {
      *  Returns the new Story instance.
      */
     async addStory(user, newStory) {
-
         const response = await axios.post(
             `${BASE_URL}/stories`,
             {
@@ -89,7 +88,6 @@ class StoryList {
      * - storyId: the ID of the story that will be deleted
      */
     async removeStory(user, storyId) {
-
         await axios.delete(
             `${BASE_URL}/stories/${storyId}`,
             {
@@ -136,7 +134,6 @@ class User {
      * - token
      */
     constructor({ username, name, createdAt, favorites=[], ownStories=[] }, token) {
-
         this.username = username;
         this.name = name;
         this.createdAt = createdAt;
@@ -152,7 +149,6 @@ class User {
      * - storyId (string): the ID of the story to be favorited.
      */
     async addStoryToFavorites(storyId) {
-
         await axios.post(
             `${BASE_URL}/users/${this.username}/favorites/${storyId}`,
             {
@@ -173,7 +169,6 @@ class User {
      * - storyId (string): the ID of the story to be removed from favorites.
      */
     async removeStoryFromFavorites(storyId) {
-
         await axios.delete(
             `${BASE_URL}/users/${this.username}/favorites/${storyId}`,
             {
