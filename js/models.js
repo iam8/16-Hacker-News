@@ -62,7 +62,8 @@ class StoryList {
     /** Add story data to API, make a Story instance, and add it to the story list.
      * - user: the current instance of User who will post the story
      * - newStory: data about the new story - object of {title, author, url}
-     *  Returns the new Story instance.
+     * 
+     * Returns the new Story instance.
      */
     async addStory(user, newStory) {
         const response = await axios.post(
@@ -97,28 +98,52 @@ class StoryList {
             }
         )
 
+        // Remove this story from all internal lists of stories (global story list, user's ownStories list, and user's favorites list)
+        StoryList.removeStoryFromList(this.stories, storyId);
+        StoryList.removeStoryFromList(user.ownStories, storyId);
+        StoryList.removeStoryFromList(user.favorites, storyId);
+
         // Remove this story from the global story list
-        const storyIdx = this.stories.findIndex(
+        // const storyIdx = this.stories.findIndex(
+        //     (story) => story.storyId === storyId
+        // );
+
+        // if (storyIdx >= 0) {
+        //     this.stories.splice(storyIdx, 1);
+        // }
+
+        // Remove this story from the user's ownStories and favorites lists
+        // const ownStoriesIdx = user.ownStories.findIndex(
+        //     (story) => story.storyId === storyId);
+
+        // const favIdx = user.favorites.findIndex(
+        //     (story) => story.storyId === storyId);
+
+        // if (ownStoriesIdx >= 0) {
+        //     user.ownStories.splice(ownStoriesIdx, 1);
+        // }
+
+        // if (favIdx >= 0) {
+        //     user.favorites.splice(favIdx, 1);
+        // }
+    }
+
+    /** Find and remove a Story object (by ID) from a given list (Array) of Story objects.
+     * - list: an Array of Story objects
+     * - storyId: the ID of the story to remove
+     * 
+     * Returns true if the story with the given ID was successfully removed, and false otherwise.
+    */
+    static removeStoryFromList(list, storyId) {
+        const foundIdx = list.findIndex(
             (story) => story.storyId === storyId
         );
 
-        if (storyIdx >= 0) {
-            this.stories.splice(storyIdx, 1);
-        }
-
-        // Remove this story from the user's ownStories and favorites lists
-        const ownStoriesIdx = user.ownStories.findIndex(
-            (story) => story.storyId === storyId);
-
-        const favIdx = user.favorites.findIndex(
-            (story) => story.storyId === storyId);
-
-        if (ownStoriesIdx >= 0) {
-            user.ownStories.splice(ownStoriesIdx, 1);
-        }
-
-        if (favIdx >= 0) {
-            user.favorites.splice(favIdx, 1);
+        if (foundIdx >= 0) {
+            list.splice(foundIdx, 1);
+            return true;
+        } else {
+            return false;
         }
     }
 }
