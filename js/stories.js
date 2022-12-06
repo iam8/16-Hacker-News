@@ -2,24 +2,21 @@
 // 11/28/22
 // Unit 16: Hack or Snooze
 
-
 "use strict";
 
-// This is the global list of the stories, an instance of StoryList
-let storyList;
 
-/** Get and show stories when site first loads. */
+let storyList;  // Global list of stories (StoryList instance)
 
+/** Get and show stories when the site first loads. */
 async function getAndShowStoriesOnStart() {
-    console.debug("getAndShowStoriesOnStart");
+    // console.debug("getAndShowStoriesOnStart");
     storyList = await StoryList.getStories();
     $storiesLoadingMsg.remove();
 
     putStoriesOnPage();
 }
 
-/**
- * A render method to render HTML for an individual Story instance
+/** Render the HTML for an individual Story instance.
  * - story: an instance of Story
  *
  * Returns the markup for the story.
@@ -34,11 +31,8 @@ function generateStoryMarkup(story) {
 
         // Story should show up as 'favorited' if it exists in the current user's favorites list
         favIconClass = "far fa-star";
-        for (let fav of currentUser.favorites) {
-            if (fav.storyId === story.storyId) {
-                favIconClass = "fas fa-star";
-                break;
-            }
+        if (currentUser.favorites.find((fav) => fav.storyId === story.storyId)) {
+            favIconClass = "fas fa-star";
         }
 
         // Story should show a 'delete' icon only if it was posted by the current user
@@ -50,14 +44,14 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <i class="${favIconClass}"></i>
-        <a href="${story.url}" target="a_blank" class="story-link">
-          ${story.title}
-        </a>
-        <small class="story-hostname">(${hostName})</small>
-        <small class="story-author">by ${story.author}</small>
-        <i class="${delIconClass}"></i>
-        <small class="story-user">posted by ${story.username}</small>
+            <i class="${favIconClass}"></i>
+            <a href="${story.url}" target="a_blank" class="story-link">
+                ${story.title}
+            </a>
+            <small class="story-hostname">(${hostName})</small>
+            <small class="story-author">by ${story.author}</small>
+            <i class="${delIconClass}"></i>
+            <small class="story-user">posted by ${story.username}</small>
       </li>
     `);
 }
