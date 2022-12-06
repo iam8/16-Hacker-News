@@ -159,6 +159,7 @@ class User {
             }
         );
 
+        // Find the Story object with the given storyId
         const foundStory = storyList.stories.find((story) => story.storyId === storyId);
 
         if (foundStory) {
@@ -183,12 +184,7 @@ class User {
         );
 
         // Remove the Story object with the given storyId from the User's favorites list
-        for (let index in this.favorites) {
-            if (this.favorites[index].storyId === storyId) {
-                this.favorites.splice(index, 1);
-                return;
-            }
-        }
+        StoryList.removeStoryFromList(this.favorites, storyId);
     }
 
     /** Register a new user in API, make a User instance for that user and return it.
