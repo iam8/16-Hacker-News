@@ -102,30 +102,6 @@ class StoryList {
         StoryList.removeStoryFromList(this.stories, storyId);
         StoryList.removeStoryFromList(user.ownStories, storyId);
         StoryList.removeStoryFromList(user.favorites, storyId);
-
-        // Remove this story from the global story list
-        // const storyIdx = this.stories.findIndex(
-        //     (story) => story.storyId === storyId
-        // );
-
-        // if (storyIdx >= 0) {
-        //     this.stories.splice(storyIdx, 1);
-        // }
-
-        // Remove this story from the user's ownStories and favorites lists
-        // const ownStoriesIdx = user.ownStories.findIndex(
-        //     (story) => story.storyId === storyId);
-
-        // const favIdx = user.favorites.findIndex(
-        //     (story) => story.storyId === storyId);
-
-        // if (ownStoriesIdx >= 0) {
-        //     user.ownStories.splice(ownStoriesIdx, 1);
-        // }
-
-        // if (favIdx >= 0) {
-        //     user.favorites.splice(favIdx, 1);
-        // }
     }
 
     /** Find and remove a Story object (by ID) from a given list (Array) of Story objects.
