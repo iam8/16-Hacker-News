@@ -32,7 +32,7 @@ function generateStoryMarkup(story) {
 
     if (currentUser) {
 
-        // Determine if the story should show up as favorited
+        // Story should show up as 'favorited' if it exists in the current user's favorites list
         favIconClass = "far fa-star";
         for (let fav of currentUser.favorites) {
             if (fav.storyId === story.storyId) {
@@ -41,7 +41,7 @@ function generateStoryMarkup(story) {
             }
         }
 
-        // Determine if the story should show the delete icon
+        // Story should show a 'delete' icon only if it was posted by the current user
         if (story.username === currentUser.username) {
             delIconClass = "fas fa-trash-alt";
         }
