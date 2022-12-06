@@ -148,6 +148,8 @@ class User {
 
     /** Add a story to this User's favorites - update the API and the User's favorites list with the new favorite.
      * - storyId (string): the ID of the story to be favorited.
+     * 
+     * Return true if the story with the given ID was successfully added to the user's favorites and false otherwise.
      */
     async addStoryToFavorites(storyId) {
         await axios.post(
@@ -157,12 +159,13 @@ class User {
             }
         );
 
-        // Get the Story object with the given storyId and add it to the User's favorites list
-        for (let story of storyList.stories) {
-            if (story.storyId === storyId) {
-                this.favorites.push(story);
-                return;
-            }
+        const foundStory = storyList.stories.find((story) => story.storyId === storyId);
+
+        if (foundStory) {
+            this.favorites.push(foundStory);
+            return true;
+        } else {
+            return false;
         }
     }
 
