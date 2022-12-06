@@ -138,3 +138,19 @@ async function toggleFavoriteStatus(event) {
 }
 
 $body.on("click", "i.fa-star", toggleFavoriteStatus);
+
+
+/** Remove the story from the API and the page when the delete (trash) icon next to that story is clicked. */
+async function deleteStoryClick(event) {
+    // console.debug("Story delete icon has been clicked", event);
+
+    const clickedStoryId = $(this).parent().attr("id");
+
+    // Remove the list item containing that story from the DOM
+    $(this).parent().remove();
+
+    // Remove the clicked story from the API and internal story lists
+    await storyList.removeStory(currentUser, clickedStoryId);
+}
+
+$body.on("click", "i.fa-trash-alt", deleteStoryClick);
