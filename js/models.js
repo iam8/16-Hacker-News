@@ -172,6 +172,8 @@ class User {
 
     /** Remove a story from this User's favorites - update the API and the User's favorites list with the new favorite's removal.
      * - storyId (string): the ID of the story to be removed from favorites.
+     * 
+     * Return true if the story with the given ID was successfully removed from the user's favorites and false otherwise.
      */
     async removeStoryFromFavorites(storyId) {
         await axios.delete(
@@ -184,7 +186,7 @@ class User {
         );
 
         // Remove the Story object with the given storyId from the User's favorites list
-        StoryList.removeStoryFromList(this.favorites, storyId);
+        return StoryList.removeStoryFromList(this.favorites, storyId);
     }
 
     /** Register a new user in API, make a User instance for that user and return it.
