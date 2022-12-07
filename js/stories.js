@@ -2,9 +2,6 @@
 // 11/28/22
 // Unit 16: Hack or Snooze
 
-// TODO: error handling
-// TODO: merge the putStoriesOnPage and putFavoritesOnPage into a single function
-
 "use strict";
 
 let storyList;  // Global list of stories (StoryList instance)
