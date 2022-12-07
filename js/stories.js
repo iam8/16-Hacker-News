@@ -16,7 +16,7 @@ async function getAndShowStoriesOnStart() {
     storyList = await StoryList.getStories();
     $storiesLoadingMsg.remove();
 
-    putStoriesOnPage();
+    displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 
 /** Render the HTML for an individual Story instance.
@@ -58,33 +58,33 @@ function generateStoryMarkup(story) {
     `);
 }
 
-/** Get list of all stories from global StoryList, generate their HTML, and display the list on the page. */
-function putStoriesOnPage() {
-//   console.debug("putStoriesOnPage");
+// /** Get list of all stories from global StoryList, generate their HTML, and display the list on the page. */
+// function putStoriesOnPage() {
+// //   console.debug("putStoriesOnPage");
 
-    $allStoriesList.empty();
+//     $allStoriesList.empty();
 
-    for (let story of storyList.stories) {
-        const $story = generateStoryMarkup(story);
-        $allStoriesList.append($story);
-    }
+//     for (let story of storyList.stories) {
+//         const $story = generateStoryMarkup(story);
+//         $allStoriesList.append($story);
+//     }
 
-    $allStoriesList.show();
-}
+//     $allStoriesList.show();
+// }
 
-/** Get list of this user's favorited stories, generate their HTML, and display the list on the page. */
-function putFavoritesOnPage() {
-    // console.debug("putFavoritesOnPage");
+// /** Get list of this user's favorited stories, generate their HTML, and display the list on the page. */
+// function putFavoritesOnPage() {
+//     // console.debug("putFavoritesOnPage");
 
-    $favoritesList.empty();
+//     $favoritesList.empty();
 
-    for (let fav of currentUser.favorites) {
-        const $favStory = generateStoryMarkup(fav);
-        $favoritesList.append($favStory);
-    }
+//     for (let fav of currentUser.favorites) {
+//         const $favStory = generateStoryMarkup(fav);
+//         $favoritesList.append($favStory);
+//     }
 
-    $favoritesList.show();
-}
+//     $favoritesList.show();
+// }
 
 /** Get a specified list of Story objects, generate their HTML, and display this list on the page.
  * Valid lists to retrieve are:
@@ -125,7 +125,7 @@ async function submitNewStoryInfo(event) {
     $newStoryForm.trigger("reset");
     $newStoryForm.hide();
 
-    putStoriesOnPage();
+    displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 
 $newStoryForm.on("submit", submitNewStoryInfo);
