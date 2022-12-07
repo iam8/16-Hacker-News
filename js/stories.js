@@ -86,6 +86,30 @@ function putFavoritesOnPage() {
     $favoritesList.show();
 }
 
+/** Get a specified list of Story objects, generate their HTML, and display this list on the page.
+ * Valid lists to retrieve are:
+ * 
+ * - The story list array in the global StoryList object (holds all stories)
+ * - The current user's own stories (ownStories)
+ * - The current user's favorite stories
+ * 
+ * Parameters:
+ * 
+ * - storyList (array): list of Story objects to display on page
+ * - domElement (DOMElement or jQuery object): the element in the DOM to append each story's HTML to for display
+ */
+function displayStoriesOnPage(storyList, domElement) {
+    const $domElement = $(domElement);
+    $domElement.empty();
+
+    for (let story of storyList) {
+        const $storyHtml = generateStoryMarkup(story);
+        $domElement.append($storyHtml);
+    }
+
+    $domElement.show();
+}
+
 
 /** Submit and update the API with the info entered by the user in the new story form, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
