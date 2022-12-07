@@ -3,7 +3,7 @@
 /* Unit 16: Hack or Snooze */
 
 
-/* General typography */
+/* General typography ---------------------------------------------------------------------------*/
 
 body {
   font-family: Arimo, sans-serif;
@@ -35,7 +35,7 @@ a:hover {
 }
 
 
-/* Site layout */
+/* Site layout ----------------------------------------------------------------------------------*/
 
 /* This is the basic box that the main part of the page goes into */
 .container {
@@ -50,7 +50,7 @@ a:hover {
 }
 
 
-/* Forms */
+/* Forms ----------------------------------------------------------------------------------------*/
 
 form {
   display: flex;
@@ -112,7 +112,7 @@ form > hr {
 }
 
 
-/* responsive queries for tightening things up for mobile. */
+/* Responsive queries for tightening things up for mobile ---------------------------------------*/
 
 @media screen and (max-width: 576px) {
   body {
