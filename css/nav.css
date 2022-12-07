@@ -1,4 +1,9 @@
-/* Navigation bar */
+/* Ioana Alex Mititean */
+/* 11/28/22 */
+/* Unit 16: Hack or Snooze */
+
+
+/* Navigation bar -------------------------------------------------------------------------------*/
 
 nav {
   display: flex;
@@ -10,6 +15,10 @@ nav {
 
 .navbar-brand {
   font-weight: bold;
+}
+
+.navbar-middle {
+    margin: 0px 20px;
 }
 
 .nav-link {

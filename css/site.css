@@ -1,4 +1,9 @@
-/* General typography */
+/* Ioana Alex Mititean */
+/* 11/28/22 */
+/* Unit 16: Hack or Snooze */
+
+
+/* General typography ---------------------------------------------------------------------------*/
 
 body {
   font-family: Arimo, sans-serif;
@@ -8,6 +13,10 @@ body {
 h1 {
   font-size: 1.1rem;
   margin: 0;
+}
+
+h2 {
+    padding: 0px 20px;
 }
 
 h4 {
@@ -30,7 +39,7 @@ a:hover {
 }
 
 
-/* Site layout */
+/* Site layout ----------------------------------------------------------------------------------*/
 
 /* This is the basic box that the main part of the page goes into */
 .container {
@@ -45,7 +54,7 @@ a:hover {
 }
 
 
-/* Forms */
+/* Forms ----------------------------------------------------------------------------------------*/
 
 form {
   display: flex;
@@ -107,7 +116,7 @@ form > hr {
 }
 
 
-/* responsive queries for tightening things up for mobile. */
+/* Responsive queries for tightening things up for mobile ---------------------------------------*/
 
 @media screen and (max-width: 576px) {
   body {

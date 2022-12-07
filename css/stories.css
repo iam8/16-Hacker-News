@@ -1,7 +1,28 @@
-/* Lists of stories */
+/* Ioana Alex Mititean */
+/* 11/28/22 */
+/* Unit 16: Hack or Snooze */
+
+
+/* Story form -----------------------------------------------------------------------------------*/
+
+.story-form-container {
+    padding-left: 20px;
+}
+
+.story-form button {
+    width: 8rem;
+    margin-left: 80px;
+}
+
+.story-input label {
+    width: 70px;
+  }
+
+
+/* Lists of stories -----------------------------------------------------------------------------*/
 
 .stories-list {
-  margin: 20px 5px;
+  margin: 5px 5px;
 }
 
 .stories-list > li {
@@ -17,7 +38,24 @@
 }
 
 
-/* Individual stories */
+/* Individual stories ---------------------------------------------------------------------------*/
+
+i.fa-star {
+    color: black;
+}
+
+i.fa-star:hover {
+    color: grey;
+}
+
+i.fa-trash-alt {
+    color: red;
+    margin-left: 2em;
+}
+
+i.fa-trash-alt:hover {
+    color: orange;
+}
 
 .story-link {
   color: black;
