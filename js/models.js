@@ -83,7 +83,8 @@ class StoryList {
         return storyObj;
     }
 
-    /** Remove a story from the API and all internal story lists.
+    /** Remove a story from the API and all internal story lists (global story list, user's ownStories list, and user's favorites list).
+     * 
      * NOTE: A user can only remove stories that they posted.
      * - user: the current instance of User who deletes the story
      * - storyId: the ID of the story that will be deleted
@@ -98,7 +99,6 @@ class StoryList {
             }
         )
 
-        // Remove this story from all internal lists of stories (global story list, user's ownStories list, and user's favorites list)
         StoryList.removeStoryFromList(this.stories, storyId);
         StoryList.removeStoryFromList(user.ownStories, storyId);
         StoryList.removeStoryFromList(user.favorites, storyId);
@@ -185,7 +185,6 @@ class User {
             }
         );
 
-        // Remove the Story object with the given storyId from the User's favorites list
         return StoryList.removeStoryFromList(this.favorites, storyId);
     }
 

@@ -112,7 +112,6 @@ function saveUserCredentialsInLocalStorage() {
  */
 
 /** When a user logs in or signs up, we want to set up the UI for them:
- *
  * - Show the stories list, with 'favorite' status for each
  * - Update navbar options for the logged-in user
  */
