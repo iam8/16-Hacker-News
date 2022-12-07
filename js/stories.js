@@ -108,9 +108,6 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 async function toggleFavoriteStatus() {
     // console.debug("toggleFavoriteStatus");
 
-    // Toggle the star icon's visuals
-    $(this).toggleClass(["far", "fas"]);
-
     const clickedStoryId = $(this).parent().attr("id");
 
     // Try removing the story from the favorites list
@@ -121,6 +118,9 @@ async function toggleFavoriteStatus() {
     if (currentUser.favorites.length === initFavLen) {
         await currentUser.addStoryToFavorites(clickedStoryId);
     }
+
+    // Toggle the star icon's visuals
+    $(this).toggleClass(["far", "fas"]);
 }
 
 $body.on("click", "i.fa-star", toggleFavoriteStatus);
