@@ -13,7 +13,7 @@ let currentUser;  // Holds User instance of the currently logged in user (global
 
 /** Handle login form submission. If login is successful, set up the User instance, save the user's credentials to local storage, and update the webpage UI. */
 async function login(event) {
-    // console.debug("login", event);
+    console.debug("login", event);
     event.preventDefault();
 
     const username = $("#login-username").val();
@@ -23,6 +23,12 @@ async function login(event) {
     currentUser = await User.login(username, password);
 
     $loginForm.trigger("reset");
+
+    if (!currentUser) {
+        alert("Login failed! Please check your credentials and try again.");
+        return;
+    }
+
     saveUserCredentialsInLocalStorage();
     updateUIOnUserLogin();
 }
@@ -32,7 +38,7 @@ $loginForm.on("submit", login);
 
 /** Handle signup form submission. If signup is successful, set up the User instance, save the user's credentials to local storage, and update the webpage UI.*/
 async function signup(event) {
-    // console.debug("signup", event);
+    console.debug("signup", event);
     event.preventDefault();
 
     const name = $("#signup-name").val();
@@ -43,6 +49,12 @@ async function signup(event) {
     currentUser = await User.signup(username, password, name);
 
     $signupForm.trigger("reset");
+
+    if (!currentUser) {
+        alert("Signup failed - username taken!");
+        return;
+    }
+
     saveUserCredentialsInLocalStorage();
     updateUIOnUserLogin();
 }
@@ -70,13 +82,20 @@ $navLogOut.on("click", logout);
 /** If there are user credentials in local storage, use those to log in that user. This is meant to be called on page load, just once.
  */
 async function checkForRememberedUser() {
-    // console.debug("checkForRememberedUser");
+    console.debug("checkForRememberedUser");
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
     if (!token || !username) return false;
 
     // Try to log in with these credentials; returns null if login failed
     currentUser = await User.loginViaStoredCredentials(token, username);
+
+    if (!currentUser) {
+        console.debug("checkForRememberedUser failed!");
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -105,7 +124,7 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
 //   console.debug("updateUIOnUserLogin");
 
-  hidePageComponents();
-  displayStoriesOnPage(storyList.stories, $allStoriesList);
-  updateNavOnLogin();
+    hidePageComponents();
+    displayStoriesOnPage(storyList.stories, $allStoriesList);
+    updateNavOnLogin();
 }
