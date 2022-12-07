@@ -10,8 +10,7 @@
  */
 
 /** Show main list of all stories when clicking the site name. */
-function navAllStories(evt) {
-//   console.debug("navAllStories", evt);
+function navAllStories() {
     hidePageComponents();
 
     $pageHeader.text(headerTextAll).show();
@@ -21,8 +20,7 @@ function navAllStories(evt) {
 $body.on("click", "#nav-all", navAllStories);
 
 /** Show login/signup forms after clicking on "login/signup" link. */
-function navLoginClick(evt) {
-//   console.debug("navLoginClick", evt);
+function navLoginClick() {
     hidePageComponents();
     $loginForm.show();
     $signupForm.show();
@@ -32,7 +30,6 @@ $navLogin.on("click", navLoginClick);
 
 /** When a user first logins in, update the navbar to reflect that. */
 function updateNavOnLogin() {
-//   console.debug("updateNavOnLogin");
     $navSubStory.show();
     $navViewFavorites.show();
     $navLogin.hide();
@@ -41,8 +38,7 @@ function updateNavOnLogin() {
 }
 
 /** Show the form for submitting a new story after clicking the "Submit a story" link. */
-function navSubmitStoryClick(evt) {
-    // console.debug("navSubmitStoryClick", evt);
+function navSubmitStoryClick() {
     hidePageComponents();
     $newStoryForm.show();
 }
@@ -50,8 +46,7 @@ function navSubmitStoryClick(evt) {
 $navSubStory.on("click", navSubmitStoryClick);
 
 /** Show a list of favorited stories after clicking the "View favorites" link. */
-function navViewFavoritesClick(evt) {
-    // console.debug("navViewFavoritesClick", evt);
+function navViewFavoritesClick() {
     hidePageComponents();
 
     $pageHeader.text(headerTextFavs).show();

@@ -13,7 +13,6 @@ let currentUser;  // Holds User instance of the currently logged in user (global
 
 /** Handle login form submission. If login is successful, set up the User instance, save the user's credentials to local storage, and update the webpage UI. */
 async function login(event) {
-    console.debug("login", event);
     event.preventDefault();
 
     const username = $("#login-username").val();
@@ -38,7 +37,6 @@ $loginForm.on("submit", login);
 
 /** Handle signup form submission. If signup is successful, set up the User instance, save the user's credentials to local storage, and update the webpage UI.*/
 async function signup(event) {
-    console.debug("signup", event);
     event.preventDefault();
 
     const name = $("#signup-name").val();
@@ -67,7 +65,6 @@ $signupForm.on("submit", signup);
  * Remove the current user's credentials from local storage and refresh the page.
  */
 function logout() {
-    // console.debug("logout", evt);
     localStorage.clear();
     location.reload();
 }
@@ -82,7 +79,6 @@ $navLogOut.on("click", logout);
 /** If there are user credentials in local storage, use those to log in that user. This is meant to be called on page load, just once.
  */
 async function checkForRememberedUser() {
-    console.debug("checkForRememberedUser");
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
     if (!token || !username) return false;
@@ -104,7 +100,6 @@ async function checkForRememberedUser() {
  * When the page is refreshed or the user revisits the site later, they will still be logged in.
  */
 function saveUserCredentialsInLocalStorage() {
-//   console.debug("saveUserCredentialsInLocalStorage");
     if (currentUser) {
         localStorage.setItem("token", currentUser.loginToken);
         localStorage.setItem("username", currentUser.username);
@@ -122,8 +117,6 @@ function saveUserCredentialsInLocalStorage() {
  * - Update navbar options for the logged-in user
  */
 function updateUIOnUserLogin() {
-//   console.debug("updateUIOnUserLogin");
-
     hidePageComponents();
 
     $pageHeader.text(headerTextAll).show();

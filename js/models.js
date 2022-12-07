@@ -197,8 +197,6 @@ class User {
      * Return null if an error occurs and the User could not be created.
      */
     static async signup(username, password, name) {
-        console.debug("User.signup");
-
         try {
             const response = await axios.post(
                 `${BASE_URL}/signup`,
@@ -219,7 +217,7 @@ class User {
                 response.data.token
             );
         } catch(err) {
-            console.error(err);
+            console.error("Signup failed!", err);
             return null;
         }
     }
@@ -231,8 +229,6 @@ class User {
      * Return null if an error occurs and the User could not be created.
      */
     static async login(username, password) {
-        console.debug("User.login");
-
         try {
             const response = await axios.post(
                 `${BASE_URL}/login`,
@@ -253,7 +249,7 @@ class User {
                 response.data.token
             );
         } catch(err) {
-            console.error(err);
+            console.error("Login failed!", err);
             return null;
         }
     }
@@ -266,8 +262,6 @@ class User {
      * Otherwise, return null.
     */
     static async loginViaStoredCredentials(token, username) {
-        console.debug("loginViaStoredCredentials");
-
         try {
             const response = await axios.get(
                 `${BASE_URL}/users/${username}`,

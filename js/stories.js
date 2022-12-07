@@ -11,7 +11,6 @@ const headerTextFavs = "My Favorites";
 
 /** Get and show stories when the site first loads. */
 async function getAndShowStoriesOnStart() {
-    // console.debug("getAndShowStoriesOnStart");
     storyList = await StoryList.getStories();
     $storiesLoadingMsg.remove();
 
@@ -86,7 +85,6 @@ function displayStoriesOnPage(storyList, domElement) {
 
 /** Submit and update the API with the info entered by the user in the new story form, and show the updated list of stories. */
 async function submitNewStoryInfo(event) {
-    // console.debug("submitNewStoryInfo", event);
     event.preventDefault();
 
     // Grab the info from the story form
@@ -107,8 +105,6 @@ $newStoryForm.on("submit", submitNewStoryInfo);
 
 /** Toggle the 'favorite' status of a displayed story when its star icon is clicked. */
 async function toggleFavoriteStatus() {
-    // console.debug("toggleFavoriteStatus");
-
     const clickedStoryId = $(this).parent().attr("id");
 
     // Try removing the story from the favorites list
@@ -129,8 +125,6 @@ $body.on("click", "i.fa-star", toggleFavoriteStatus);
 
 /** Remove the story from the API and the page when the delete (trash) icon next to that story is clicked. */
 async function handleDeleteIconClick() {
-    // console.debug("Story delete icon has been clicked");
-
     const clickedStoryId = $(this).parent().attr("id");
     $(this).parent().remove();
 
