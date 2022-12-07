@@ -125,6 +125,8 @@ function updateUIOnUserLogin() {
 //   console.debug("updateUIOnUserLogin");
 
     hidePageComponents();
+
+    $pageHeader.text(headerTextAll).show();
     displayStoriesOnPage(storyList.stories, $allStoriesList);
     updateNavOnLogin();
 }

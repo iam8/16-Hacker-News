@@ -5,6 +5,8 @@
 "use strict";
 
 let storyList;  // Global list of stories (StoryList instance)
+const headerTextAll = "All Stories";
+const headerTextFavs = "My Favorites";
 
 
 /** Get and show stories when the site first loads. */
@@ -13,6 +15,7 @@ async function getAndShowStoriesOnStart() {
     storyList = await StoryList.getStories();
     $storiesLoadingMsg.remove();
 
+    $pageHeader.text(headerTextAll).show();
     displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 
@@ -95,6 +98,7 @@ async function submitNewStoryInfo(event) {
     $newStoryForm.trigger("reset");
     $newStoryForm.hide();
 
+    $pageHeader.text(headerTextAll).show();
     displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 

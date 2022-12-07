@@ -13,6 +13,8 @@
 function navAllStories(evt) {
 //   console.debug("navAllStories", evt);
     hidePageComponents();
+
+    $pageHeader.text(headerTextAll).show();
     displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 
@@ -51,6 +53,8 @@ $navSubStory.on("click", navSubmitStoryClick);
 function navViewFavoritesClick(evt) {
     // console.debug("navViewFavoritesClick", evt);
     hidePageComponents();
+
+    $pageHeader.text(headerTextFavs).show();
     displayStoriesOnPage(currentUser.favorites, $favoritesList);
 }
 

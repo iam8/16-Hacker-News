@@ -8,6 +8,8 @@
 
 const $body = $("body");
 
+const $pageHeader = $("#page-header");
+
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
 
@@ -31,6 +33,7 @@ const $favoritesList = $("#favorite-stories-list");
  */
 function hidePageComponents() {
     const components = [
+        $pageHeader,
         $allStoriesList,
         $loginForm,
         $signupForm,
