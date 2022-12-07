@@ -13,7 +13,7 @@
 function navAllStories(evt) {
 //   console.debug("navAllStories", evt);
     hidePageComponents();
-    putStoriesOnPage();
+    displayStoriesOnPage(storyList.stories, $allStoriesList);
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -51,7 +51,7 @@ $navSubStory.on("click", navSubmitStoryClick);
 function navViewFavoritesClick(evt) {
     // console.debug("navViewFavoritesClick", evt);
     hidePageComponents();
-    putFavoritesOnPage();
+    displayStoriesOnPage(currentUser.favorites, $favoritesList);
 }
 
 $navViewFavorites.on("click", navViewFavoritesClick);
