@@ -58,33 +58,6 @@ function generateStoryMarkup(story) {
     `);
 }
 
-// /** Get list of all stories from global StoryList, generate their HTML, and display the list on the page. */
-// function putStoriesOnPage() {
-// //   console.debug("putStoriesOnPage");
-
-//     $allStoriesList.empty();
-
-//     for (let story of storyList.stories) {
-//         const $story = generateStoryMarkup(story);
-//         $allStoriesList.append($story);
-//     }
-
-//     $allStoriesList.show();
-// }
-
-// /** Get list of this user's favorited stories, generate their HTML, and display the list on the page. */
-// function putFavoritesOnPage() {
-//     // console.debug("putFavoritesOnPage");
-
-//     $favoritesList.empty();
-
-//     for (let fav of currentUser.favorites) {
-//         const $favStory = generateStoryMarkup(fav);
-//         $favoritesList.append($favStory);
-//     }
-
-//     $favoritesList.show();
-// }
 
 /** Get a specified list of Story objects, generate their HTML, and display this list on the page.
  * Valid lists to retrieve are:
