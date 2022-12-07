@@ -115,12 +115,12 @@ class StoryList {
             (story) => story.storyId === storyId
         );
 
-        if (foundIdx >= 0) {
-            list.splice(foundIdx, 1);
-            return true;
-        } else {
+        if (foundIdx < 0) {
             return false;
         }
+
+        list.splice(foundIdx, 1);
+        return true;
     }
 }
 
@@ -162,12 +162,12 @@ class User {
         // Find the Story object with the given storyId
         const foundStory = storyList.stories.find((story) => story.storyId === storyId);
 
-        if (foundStory) {
-            this.favorites.push(foundStory);
-            return true;
-        } else {
+        if (!foundStory) {
             return false;
         }
+
+        this.favorites.push(foundStory);
+        return true;
     }
 
     /** Remove a story from this User's favorites - update the API and the User's favorites list with the new favorite's removal.
@@ -191,55 +191,81 @@ class User {
      * - username: a new username
      * - password: a new password
      * - name: the user's full name
+     * 
+     * Return null if an error occurs and the User could not be created.
      */
     static async signup(username, password, name) {
-        const response = await axios.post(
-            `${BASE_URL}/signup`,
-            {
-                "user": { username, password, name }
-            },
-        );
+        console.debug("User.signup");
 
-        let { user } = response.data;
-        return new User(
-            {
-                username: user.username,
-                name: user.name,
-                createdAt: user.createdAt,
-                favorites: user.favorites,
-                ownStories: user.stories
-            },
-            response.data.token
-        );
+        try {
+            const response = await axios.post(
+                `${BASE_URL}/signup`,
+                {
+                    "user": { username, password, name }
+                },
+            );
+    
+            let { user } = response.data;
+            return new User(
+                {
+                    username: user.username,
+                    name: user.name,
+                    createdAt: user.createdAt,
+                    favorites: user.favorites,
+                    ownStories: user.stories
+                },
+                response.data.token
+            );
+        } catch(err) {
+            console.error(err);
+            return null;
+        }
     }
 
     /** Login a user with the API, make a User instance for that user and return it.
      * - username: an existing user's username
      * - password: an existing user's password
+     * 
+     * Return null if an error occurs and the User could not be created.
      */
     static async login(username, password) {
-        const response = await axios.post(
-            `${BASE_URL}/login`,
-            {
-                "user": { username, password }
-            }
-        );
+        console.debug("User.login");
 
-        let { user } = response.data;
-        return new User(
-            {
-                username: user.username,
-                name: user.name,
-                createdAt: user.createdAt,
-                favorites: user.favorites,
-                ownStories: user.stories
-            },
-            response.data.token
-        );
+        try {
+            const response = await axios.post(
+                `${BASE_URL}/login`,
+                {
+                    "user": { username, password }
+                }
+            );
+
+            let { user } = response.data;
+            return new User(
+                {
+                    username: user.username,
+                    name: user.name,
+                    createdAt: user.createdAt,
+                    favorites: user.favorites,
+                    ownStories: user.stories
+                },
+                response.data.token
+            );
+        } catch(err) {
+            console.error(err);
+            return null;
+        }
     }
 
-    /** Log in a user automatically via their stored credentials, if they have have them. */
+    /** Log in a user automatically via their stored credentials, if they have have them.
+     * - token: the user's Hack or Snooze authentication token
+     * - username: the user's Hack or Snooze account username
+     * 
+     * If user data is successfully retrieved, create a User instance and return it.
+     * Otherwise, return null.
+    */
     static async loginViaStoredCredentials(token, username) {
+        console.debug("loginViaStoredCredentials");
+
         try {
             const response = await axios.get(
                 `${BASE_URL}/users/${username}`,
